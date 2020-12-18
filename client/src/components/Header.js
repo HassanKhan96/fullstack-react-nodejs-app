@@ -24,7 +24,7 @@ class Header extends Component {
                         Logo
                     </Link>
                     <ul className="right">
-                        <li>{this.renderContent()}</li>
+                        {this.renderContent()}
                     </ul>
                 </div>
             </nav>
