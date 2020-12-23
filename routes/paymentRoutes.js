@@ -1,8 +1,9 @@
 const Keys = require('../Config/Keys');
 const Stripe = require('stripe');
-const stripe = Stripe('sk_test_51HzSHtFdvOMEPwYsnZXJISWxcgHhaOeTnWI2HcxAxxwZiJV4QMeJNWCXkEMjKqPypwM2UWaX1Nt04kruEQSedw9k00ctrS4tAA')
+const stripe = Stripe(Keys.stripeSecretKey);
+const checkAuth = require('../middlewares/checkAuth');
 module.exports = app =>{
-    app.use("/api/stripe_handler", async(req, res) => {
+    app.use("/api/stripe_handler",checkAuth, async(req, res) => {
       const charge = await stripe.charges.create({
           amount: '500',
           description: "5 surveys for $5",
