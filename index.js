@@ -6,6 +6,7 @@ const passport = require('passport');
 const Keys = require('./Config/Keys');
 const BodyParser = require('body-parser');
 require('./models/Users');
+require('./models/Surveys');
 require('./services/Passport');
 app.use(BodyParser.json());
 app.use(CookieSession({
