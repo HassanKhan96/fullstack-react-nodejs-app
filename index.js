@@ -20,6 +20,7 @@ app.use(passport.session());
 
 require('./routes/authroutes')(app);
 require('./routes/paymentRoutes')(app);
+require('./routes/surveyRoute')(app);
 
 mongoose.connect(
     Keys.mongoURI,
