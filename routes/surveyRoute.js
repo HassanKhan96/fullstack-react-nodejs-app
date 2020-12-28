@@ -9,7 +9,7 @@ module.exports = app => {
             title,
             body,
             subject,
-            recepients: recepients.split(',').map(email => ({email})),
+            recepients: recepients.split(',').map(email => ({eamil: email.trim()})),
             _user: req.user.id,
             dateSent: Date.now()
         })
