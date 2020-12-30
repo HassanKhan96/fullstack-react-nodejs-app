@@ -5,6 +5,8 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as action from '../actions/index';
 import Landing from './Landing';
+import axios from 'axios';
+window.axios = axios;
 
 const SurveyNew = () => <h1>SurveryNew</h1>
 const Surveys = () => <h1>Dashboard</h1>
