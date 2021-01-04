@@ -6,7 +6,10 @@ class SurveyFrom extends Component {
     renderFields(){
         return (
             <div>
-                <Field type='text' name='title' component={SurveyField}/>
+                <Field label='Title' type='text' name='title' component={SurveyField}/>
+                <Field label='Title' type='text' name='title' component={SurveyField}/>
+                <Field label='Title' type='text' name='title' component={SurveyField}/>
+                <Field label='Title' type='text' name='title' component={SurveyField}/>
             </div>
         );
     }
