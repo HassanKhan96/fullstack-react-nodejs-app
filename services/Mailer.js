@@ -4,8 +4,9 @@ const Keys = require('../Config/Keys');
 
 class Mailer extends helper.Mail {
     constructor({subject, recepients}, content){
+        super();
         this.sgApi = sendgrid(Keys.sendGridKey);
-        this.FROM_EMAIL = new helper.Email('no-reply@email.com');
+        this.from_email = new helper.Email('khanhassan057@gmail.com');
         this.subject = subject;
         this.body = new helper.Content('text/html', content);
         this.recepients = this.formatAddresses(recepients);
@@ -21,11 +22,11 @@ class Mailer extends helper.Mail {
         });
     }
     addClickTracking(){
-        const TrackingSettings = new helper.TrackingSettings();
-        const ClickTracking = new helper.ClickTracking(true, true);
+        const trackingSettings = new helper.TrackingSettings();
+        const clickTracking = new helper.ClickTracking(true, true);
 
-        TrackingSettings.setClickTracking(ClickTracking);
-        this.addTrackingSettings(TrackingSettings);
+        trackingSettings.setClickTracking(clickTracking);
+        this.addTrackingSettings(trackingSettings);
     }
 
     addRecepients(){
@@ -47,6 +48,7 @@ class Mailer extends helper.Mail {
         return response;
         
     }
+    
 }
 
 module.exports = Mailer;
