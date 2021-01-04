@@ -5,11 +5,10 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as action from '../actions/index';
 import Landing from './Landing';
+import Dashboard from './Dashboard';
+import SurveyNew from './surveys/SurveyNew';
 import axios from 'axios';
 window.axios = axios;
-
-const SurveyNew = () => <h1>SurveryNew</h1>
-const Surveys = () => <h1>Dashboard</h1>
 
 class App extends Component {
     componentDidMount(){
@@ -22,7 +21,7 @@ class App extends Component {
                     <div>
                         <Header />
                         <Route exact path="/" component={Landing}/>
-                        <Route exact path="/surveys" component={Surveys}/>
+                        <Route exact path="/surveys" component={Dashboard}/>
                         <Route path="/surveys/new" component={SurveyNew}/>
                     </div>
                 </BrowserRouter>

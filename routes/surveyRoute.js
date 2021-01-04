@@ -8,6 +8,11 @@ const Keys = require('../Config/Keys');
 const surveyTemplate = require('../services/templates/surveyTemplate');
 const Mailer2 = require('../services/Mailer2');
 module.exports = app => {
+
+    app.get('/api/surveys/redirect', (req,res)=>{
+        res.send("<h1>Thanks for the feedback!</h1>")
+    })
+    
     app.post('/api/surveys', checkAuth, checkCredit, async (req, res) => {
         const { title, body, subject, recepients } = req.body;
         const survey = new Survey({
