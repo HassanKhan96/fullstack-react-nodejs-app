@@ -2,8 +2,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 import FIELDS from './formFields';
 import * as actions from '../../actions/index';
+import { useHistory } from 'react-router-dom';
 
 const SurveyFormReview = ({ onCancel, formValues, submitSurvey }) => {
+    const history = useHistory();
     const fieldList = FIELDS.map(({label, name}) => {
         return <div key={name} style={{marginBottom: '20px'}}>
             <label>{label}</label>
@@ -21,7 +23,7 @@ const SurveyFormReview = ({ onCancel, formValues, submitSurvey }) => {
                 Go back
             </button>
             <button 
-                onClick={() => submitSurvey(formValues)}
+                onClick={() => submitSurvey(formValues, history)}
                 className='btn-flat green white-text right'
             >
                 Submit
