@@ -12,13 +12,13 @@ const surveyTemplate = require('../services/templates/surveyTemplate');
 const Mailer2 = require('../services/Mailer2');
 module.exports = app => {
 
-    app.get('/api/surveys', (req,res)=>{
+    app.get('/api/surveys/:surveyid/:choice', (req,res)=>{
         res.send("<h1>Thanks for the feedback!</h1>")
     })
     
     app.post('/api/surveys/webhook', (req, res) =>{
         const p = new Path('/api/surveys/:surveyid/:choice');
-        const events = _.chain(req.body)
+        _.chain(req.body)
             .map(({email, url}) => {
                 const match = p.test(new URL(url).pathname);
                 if(match){
@@ -27,9 +27,20 @@ module.exports = app => {
             })
             .compact()
             .uniqBy('email', 'surveyid')
+            .each(({surveyid, email, choice}) => {
+                Survey.updateOne({
+                    _id: surveyid,
+                    recepients:{
+                        $elemMatch: {email: email, responded: false}
+                    }
+                },
+                {
+                    $inc: { [choice]: 1},
+                    $set: { 'recepients.$.responded': true},
+                    lastResponded: new Date()
+                }).exec();
+            })
             .value();
-            
-        console.log(events);
         res.send({});
     })
 
