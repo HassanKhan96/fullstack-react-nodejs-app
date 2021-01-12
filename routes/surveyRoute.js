@@ -1,5 +1,6 @@
 const checkAuth = require('../middlewares/checkAuth');
 const checkCredit = require('../middlewares/checkCredit');
+const _ = require('lodash');
 const { Path }  = require('path-parser');
 const { URL } = require('url');
 const mongoose = require('mongoose');
@@ -16,12 +17,19 @@ module.exports = app => {
     })
     
     app.post('/api/surveys/webhook', (req, res) =>{
-        console.log(req.body[0].url)
-        req.body.map(event => {
-            const pathname = new URL(event.url).pathname;
-            const p = new Path('/api/surveys/:surveyid/:choice');
-            console.log(p.test(pathname));
-        })
+        const p = new Path('/api/surveys/:surveyid/:choice');
+        const events = _.chain(req.body)
+            .map(({email, url}) => {
+                const match = p.test(new URL(url).pathname);
+                if(match){
+                    return { email, surveyid: match.surveyid, choice: match.choice}
+                }
+            })
+            .compact()
+            .uniqBy('email', 'surveyid')
+            .value();
+            
+        console.log(events);
         res.send({});
     })
 
