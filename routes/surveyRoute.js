@@ -12,6 +12,11 @@ const surveyTemplate = require('../services/templates/surveyTemplate');
 const Mailer2 = require('../services/Mailer2');
 module.exports = app => {
 
+    app.get('/api/surveys', async (req,res, next) => {
+        const surveys = await Survey.find({ _user: req.user.id}).select({ recepients: false});
+        res.send(surveys);
+    });
+
     app.get('/api/surveys/:surveyid/:choice', (req,res)=>{
         res.send("<h1>Thanks for the feedback!</h1>")
     })
