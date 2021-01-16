@@ -1,6 +1,6 @@
 # Survey App
 
-Survey app front-end is built with react and back-end is built with node js and express.
+Survey fullstack app. The front-end of this app is built with react and back-end is built with node js and express.
 
 ## Packages and APIs used.
 
